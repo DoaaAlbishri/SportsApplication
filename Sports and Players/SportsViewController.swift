@@ -20,10 +20,13 @@ class sportsCell :UITableViewCell{
 
 class SportsViewController: UIViewController {
     var sports = [Sports] ()
-    var indexOfImage :Int = 0
+    var indexOfImage : IndexPath?
     
     @IBOutlet weak var tableView: UITableView!
     var managedObjectContextOfSports = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let saveContext = (UIApplication.shared.delegate as! AppDelegate).saveContext
+
     
     @IBAction func addSportsButton(_ sender: UIBarButtonItem) {
         
@@ -85,7 +88,17 @@ class SportsViewController: UIViewController {
         }
     }
     @IBAction func addImageButtonPressed(_ sender: UIButton) {
-        indexOfImage = sender.tag
+        guard let cell = sender.superview?.superview as? sportsCell else {
+            return // or fatalError() or whatever
+        }
+        
+        guard let indexPath = self.tableView.indexPath(for: cell) else {
+                   // Note, this shouldn't happen - how did the user tap on a button that wasn't on screen?
+                   return
+               }
+
+        indexOfImage = indexPath
+        print(indexOfImage)
         importPicture()
         fetchSports()
     }
@@ -185,14 +198,16 @@ extension SportsViewController : UITableViewDataSource , UITableViewDelegate {
 extension SportsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        //index of cell !!!
+        //indexpath of cell -->  indexOfImage
         let image = info[.originalImage] as? UIImage
-        let indexPath = IndexPath(row: indexOfImage, section: 0)
-        let cell = tableView.cellForRow(at: indexPath) as! sportsCell
+        let cell = tableView.cellForRow(at: indexOfImage!) as! sportsCell
         cell.imageViewSport.image = image
         cell.addImageButton.isHidden = true
-        let newImage = Sports(context: self.managedObjectContextOfSports)
-        newImage.image = image?.jpegData(compressionQuality: 0.5)
+        
+        let sport = sports[(indexOfImage?.row)!]
+        sport.image = image?.jpegData(compressionQuality: 0.5)
+        //let newImage = Sports(context: self.managedObjectContextOfSports)
+        //newImage.image = image?.jpegData(compressionQuality: 0.5)
         do {
             try self.managedObjectContextOfSports.save()
             print("Save successful")
