@@ -138,17 +138,28 @@ extension PlayersViewController : UITableViewDataSource , UITableViewDelegate {
         
         let editAlert = UIAlertController(title: "Edit player ", message: "Edit details of player", preferredStyle: .alert)
         
-        editAlert.addTextField(configurationHandler: nil)
-        editAlert.addTextField(configurationHandler: nil)
-        editAlert.addTextField(configurationHandler: nil)
+        if let playersEdit = self.sport?.players?.allObjects as? [Players] {
+            let playerEdit = playersEdit[indexPath.row]
+            
+            editAlert.addTextField { (textField) -> Void in
+                textField.text = playerEdit.playerName
+                
+            }
+            editAlert.addTextField { (textField) -> Void in
+                textField.text = playerEdit.age
+                
+            }
+            editAlert.addTextField { (textField) -> Void in
+                textField.text = playerEdit.height
+                
+            }
+        }
         
         let name =  editAlert.textFields![0]
         let age =  editAlert.textFields![1]
         let height =  editAlert.textFields![2]
         
-        name.placeholder = "Enter name"
-        age.placeholder = "Enter age"
-        height.placeholder = "Enter height"
+        
         let saveActionplayer = UIAlertAction(title: "Edit", style: .default)
         {
             _ in

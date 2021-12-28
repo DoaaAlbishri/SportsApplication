@@ -141,13 +141,16 @@ extension SportsViewController : UITableViewDataSource , UITableViewDelegate {
         tableView.reloadData()
     }
     
+    
+    //update
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let editAlert = UIAlertController(title: "Edit sport ", message: "Edit sport as you want ", preferredStyle: .alert)
         
-        editAlert.addTextField(configurationHandler: nil)
+        editAlert.addTextField { (textField) -> Void in
+            textField.text = self.sports[indexPath.row].name
+        }
         let sport =  editAlert.textFields![0]
-        sport.placeholder = "Enter sport"
         
         let saveAction = UIAlertAction(title: "Edit", style: .default)
         {
