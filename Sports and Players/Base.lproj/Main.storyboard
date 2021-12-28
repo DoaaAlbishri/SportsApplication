@@ -66,9 +66,9 @@
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
                                         <connections>
-                                            <outlet property="addImageButton" destination="Sfq-hd-C12" id="yNN-ON-IVi"/>
-                                            <outlet property="imageView" destination="cqM-xy-Rvc" id="eei-dD-Gz7"/>
-                                            <outlet property="sportNameLabel" destination="0F8-yX-mgc" id="DxE-uf-q4H"/>
+                                            <outlet property="addImageButton" destination="Sfq-hd-C12" id="9kk-Ru-UZB"/>
+                                            <outlet property="imageViewSport" destination="cqM-xy-Rvc" id="yyC-ol-TV2"/>
+                                            <outlet property="sportNameLabel" destination="0F8-yX-mgc" id="nu7-s9-Liu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

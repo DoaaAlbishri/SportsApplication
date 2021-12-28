@@ -142,7 +142,7 @@ extension PlayersViewController : UITableViewDataSource , UITableViewDelegate {
             let playerEdit = playersEdit[indexPath.row]
             
             editAlert.addTextField { (textField) -> Void in
-                textField.text = playerEdit.playerName
+                textField.text = playerEdit.playerName!
                 
             }
             editAlert.addTextField { (textField) -> Void in

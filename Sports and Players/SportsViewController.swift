@@ -87,12 +87,6 @@ class SportsViewController: UIViewController {
     @IBAction func addImageButtonPressed(_ sender: UIButton) {
         indexOfImage = sender.tag
         importPicture()
-        do {
-            try self.managedObjectContextOfSports.save()
-            print("Save successful")
-        } catch {
-            print("Error \(error)")
-        }
         fetchSports()
     }
     
@@ -191,11 +185,20 @@ extension SportsViewController : UITableViewDataSource , UITableViewDelegate {
 extension SportsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
+        //index of cell !!!
         let image = info[.originalImage] as? UIImage
-        //let indexPath = IndexPath(row: indexOfImage, section: 0)
-        //let cell = tableView.cellForRow(at: indexPath) as! sportsCell
-        //cell.imageViewSport.image = image
+        let indexPath = IndexPath(row: indexOfImage, section: 0)
+        let cell = tableView.cellForRow(at: indexPath) as! sportsCell
+        cell.imageViewSport.image = image
+        cell.addImageButton.isHidden = true
+        let newImage = Sports(context: self.managedObjectContextOfSports)
+        newImage.image = image?.jpegData(compressionQuality: 0.5)
+        do {
+            try self.managedObjectContextOfSports.save()
+            print("Save successful")
+        } catch {
+            print("Error \(error)")
+        }
         picker.dismiss(animated: true, completion: nil)
     }
 }
