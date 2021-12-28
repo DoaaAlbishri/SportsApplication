@@ -26,54 +26,54 @@ class SportsViewController: UIViewController {
     var managedObjectContextOfSports = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBAction func addSportsButton(_ sender: UIBarButtonItem) {
-      
-            let addAlert = UIAlertController(title: "Add sport ", message: "Add the sport you want it", preferredStyle: .alert)
-            
-            addAlert.addTextField(configurationHandler: nil)
-           let sport =  addAlert.textFields![0]
-            sport.placeholder = "Enter sport"
-            
         
-            let saveAction = UIAlertAction(title: "Save", style: .default)
-                   {
-                       _ in
-
-                       let newSport = Sports(context: self.managedObjectContextOfSports)
-                       newSport.name = sport.text!
-                  
-                       self.tableView.reloadData()
-                       
-                       do {
-                           try self.managedObjectContextOfSports.save()
-                                   print("Save successful")
-                               } catch {
-                                   print("Error \(error)")
-                               }
-                               
-                       self.fetchSports()
-                   }
+        let addAlert = UIAlertController(title: "Add sport ", message: "Add the sport you want it", preferredStyle: .alert)
+        
+        addAlert.addTextField(configurationHandler: nil)
+        let sport =  addAlert.textFields![0]
+        sport.placeholder = "Enter sport"
+        
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default)
+        {
+            _ in
             
+            let newSport = Sports(context: self.managedObjectContextOfSports)
+            newSport.name = sport.text!
             
+            self.tableView.reloadData()
             
+            do {
+                try self.managedObjectContextOfSports.save()
+                print("Save successful")
+            } catch {
+                print("Error \(error)")
+            }
+            
+            self.fetchSports()
+        }
+        
+        
+        
         present(addAlert, animated: true, completion: nil)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            addAlert.addAction(saveAction)
-            addAlert.addAction(cancelAction)
-
-
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        addAlert.addAction(saveAction)
+        addAlert.addAction(cancelAction)
+        
+        
     }
     
     func fetchSports()
-       {
-           do {
-                       sports = try managedObjectContextOfSports.fetch(Sports.fetchRequest())
-                       print("Success")
-                   } catch {
-                       print("Error: \(error)")
-                   }
-                   tableView.reloadData()
-           
-       }
+    {
+        do {
+            sports = try managedObjectContextOfSports.fetch(Sports.fetchRequest())
+            print("Success")
+        } catch {
+            print("Error: \(error)")
+        }
+        tableView.reloadData()
+        
+    }
     
     //MARK: - Import Picture
     func importPicture() {
@@ -89,10 +89,10 @@ class SportsViewController: UIViewController {
         importPicture()
         do {
             try self.managedObjectContextOfSports.save()
-                    print("Save successful")
-                } catch {
-                    print("Error \(error)")
-                }
+            print("Save successful")
+        } catch {
+            print("Error \(error)")
+        }
         fetchSports()
     }
     
@@ -110,75 +110,75 @@ class SportsViewController: UIViewController {
 extension SportsViewController : UITableViewDataSource , UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return sports.count
-       }
-       
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return sports.count
+    }
     
-           guard let cell = tableView.dequeueReusableCell(withIdentifier: "sportCell", for: indexPath) as? sportsCell else {return UITableViewCell()}
-           let sport = sports[indexPath.row]
-           cell.sportNameLabel.text = sport.name
-           if let imageData = sport.image {
-              cell.imageViewSport.image = UIImage(data: imageData)
-               cell.addImageButton.isHidden = true
-                  }
-           return cell
-       }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "sportCell", for: indexPath) as? sportsCell else {return UITableViewCell()}
+        let sport = sports[indexPath.row]
+        cell.sportNameLabel.text = sport.name
+        if let imageData = sport.image {
+            cell.imageViewSport.image = UIImage(data: imageData)
+            cell.addImageButton.isHidden = true
+        }
+        return cell
+    }
     // delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-             let sportname = sports[indexPath.row]
-             managedObjectContextOfSports.delete(sportname)
-                   
-                   do
-                   {
-                  try managedObjectContextOfSports.save()
-                       
-                   } catch
-                   {print("\(error)")}
-                   
-            sports.remove(at: indexPath.row)
-           
-            tableView.reloadData()
-        }
-       
-       func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sportname = sports[indexPath.row]
+        managedObjectContextOfSports.delete(sportname)
         
-           let editAlert = UIAlertController(title: "Edit sport ", message: "Edit sport as you want ", preferredStyle: .alert)
-           
-           editAlert.addTextField(configurationHandler: nil)
-          let sport =  editAlert.textFields![0]
-           sport.placeholder = "Enter sport"
-           
-           let saveAction = UIAlertAction(title: "Edit", style: .default)
-                  {
-                      _ in
-
-                      self.sports[indexPath.row].name = sport.text!
-                 
-                      self.tableView.reloadData()
-                      
-                      do {
-                          try self.managedObjectContextOfSports.save()
-                                  print("Edit successful")
-                              } catch {
-                                  print("Error \(error)")
-                              }
-                              
-                      self.fetchSports()
-                  }
-           
-           
-           
-       present(editAlert, animated: true, completion: nil)
-           let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-           editAlert.addAction(saveAction)
-           editAlert.addAction(cancelAction)
-
-
-       }
+        do
+        {
+            try managedObjectContextOfSports.save()
+            
+        } catch
+        {print("\(error)")}
+        
+        sports.remove(at: indexPath.row)
+        
+        tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let editAlert = UIAlertController(title: "Edit sport ", message: "Edit sport as you want ", preferredStyle: .alert)
+        
+        editAlert.addTextField(configurationHandler: nil)
+        let sport =  editAlert.textFields![0]
+        sport.placeholder = "Enter sport"
+        
+        let saveAction = UIAlertAction(title: "Edit", style: .default)
+        {
+            _ in
+            
+            self.sports[indexPath.row].name = sport.text!
+            
+            self.tableView.reloadData()
+            
+            do {
+                try self.managedObjectContextOfSports.save()
+                print("Edit successful")
+            } catch {
+                print("Error \(error)")
+            }
+            
+            self.fetchSports()
+        }
+        
+        
+        
+        present(editAlert, animated: true, completion: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        editAlert.addAction(saveAction)
+        editAlert.addAction(cancelAction)
+        
+        
+    }
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let playersViewController = storyboard?.instantiateViewController(withIdentifier: "PlayersViewController") as? PlayersViewController
-            playersViewController?.sport = sports[indexPath.row]
+        playersViewController?.sport = sports[indexPath.row]
         self.navigationController?.pushViewController(playersViewController!, animated: true)
     }
 }

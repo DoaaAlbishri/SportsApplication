@@ -6,14 +6,6 @@
 //
 
 import UIKit
-class playersCell :UITableViewCell{
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    
-    @IBOutlet weak var ageLabel: UILabel!
-    
-    @IBOutlet weak var heightLabel: UILabel!
-}
 
 class PlayersViewController: UIViewController {
     var managedObjectContextOfPlayer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -115,15 +107,12 @@ extension PlayersViewController : UITableViewDataSource , UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath) as? playersCell else {return UITableViewCell()}
+        let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath)
         
         if let players = sport?.players?.allObjects as? [Players] {
-                    let player = players[indexPath.row]
-            cell.nameLabel.text = player.playerName
-            cell.ageLabel.text = player.age
-            cell.heightLabel.text = player.height
-                }
-        
+            let player = players[indexPath.row]
+            cell.textLabel?.text = "\(player.playerName!) - Age: \(player.age), Height: \(player.height)"
+        }
         return cell
     }
     
@@ -131,7 +120,7 @@ extension PlayersViewController : UITableViewDataSource , UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if let players = sport?.players?.allObjects as? [Players] {
-        let player = players[indexPath.row]
+            let player = players[indexPath.row]
             managedObjectContextOfPlayer.delete(player)
         }
         
@@ -141,12 +130,12 @@ extension PlayersViewController : UITableViewDataSource , UITableViewDelegate {
             
         } catch
         {print("\(error)")}
-                
+        
         tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         let editAlert = UIAlertController(title: "Edit player ", message: "Edit details of player", preferredStyle: .alert)
         
         editAlert.addTextField(configurationHandler: nil)
@@ -163,13 +152,13 @@ extension PlayersViewController : UITableViewDataSource , UITableViewDelegate {
         let saveActionplayer = UIAlertAction(title: "Edit", style: .default)
         {
             _ in
-           
+            
             if let players = self.sport?.players?.allObjects as? [Players] {
                 let player = players[indexPath.row]
                 player.playerName = name.text!
                 player.age = age.text!
                 player.height = height.text!
-                    }
+            }
             self.savePlayers()
             self.tableView.reloadData()
             self.fetchPlayers()

@@ -113,50 +113,22 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="player" rowHeight="66" id="1yB-wR-O9f" customClass="playersCell" customModule="Sports_and_Players" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="player" textLabel="8iv-sd-rwc" rowHeight="66" style="IBUITableViewCellStyleDefault" id="1yB-wR-O9f" customClass="playersCell" customModule="Sports_and_Players" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1yB-wR-O9f" id="WSN-9R-v0f">
                                             <rect key="frame" x="0.0" y="0.0" width="356" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDB-oe-72p">
-                                                    <rect key="frame" x="5" y="20" width="45" height="26"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVx-nq-x2f">
-                                                    <rect key="frame" x="163" y="31" width="30" height="4"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KD-dr-7Ss">
-                                                    <rect key="frame" x="292.5" y="31" width="50.5" height="4"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8iv-sd-rwc">
+                                                    <rect key="frame" x="20" y="0.0" width="328" height="66"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="eVx-nq-x2f" firstAttribute="centerY" secondItem="WSN-9R-v0f" secondAttribute="centerY" id="9gh-fU-Zmx"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="6KD-dr-7Ss" secondAttribute="bottom" constant="20" id="GBo-YA-rzf"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="6KD-dr-7Ss" secondAttribute="trailing" constant="5" id="HdH-9t-fqO"/>
-                                                <constraint firstItem="6KD-dr-7Ss" firstAttribute="top" secondItem="WSN-9R-v0f" secondAttribute="topMargin" constant="20" id="IbP-15-77A"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="eVx-nq-x2f" secondAttribute="bottom" constant="20" id="Kai-vE-AAj"/>
-                                                <constraint firstItem="fDB-oe-72p" firstAttribute="leading" secondItem="WSN-9R-v0f" secondAttribute="leading" constant="5" id="S7k-if-SOm"/>
-                                                <constraint firstItem="eVx-nq-x2f" firstAttribute="top" secondItem="WSN-9R-v0f" secondAttribute="topMargin" constant="20" id="Sy1-Hb-4Ra"/>
-                                                <constraint firstItem="eVx-nq-x2f" firstAttribute="centerX" secondItem="WSN-9R-v0f" secondAttribute="centerX" id="gfv-Vr-3BM"/>
-                                                <constraint firstItem="fDB-oe-72p" firstAttribute="top" secondItem="WSN-9R-v0f" secondAttribute="top" constant="20" id="kKa-d5-mrd"/>
-                                                <constraint firstAttribute="bottom" secondItem="fDB-oe-72p" secondAttribute="bottom" constant="20" id="xda-XV-VAI"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="ageLabel" destination="eVx-nq-x2f" id="aot-d8-c0s"/>
-                                            <outlet property="heightLabel" destination="6KD-dr-7Ss" id="afe-0u-iQa"/>
-                                            <outlet property="nameLabel" destination="fDB-oe-72p" id="ttB-T4-d2a"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
